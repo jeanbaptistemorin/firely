@@ -33,7 +33,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import com.smaspe.iterables.FuncIter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -98,13 +97,9 @@ class InternalFirely {
 
         // Set defaults from IFirelyConfig to FirebaseRemoteConfig
         final HashMap<String, Object> defaults = new HashMap<>();
-        FuncIter.iter(firelyConfig.allValues())
-                .each(new FuncIter.Exec<IFirelyItem>() {
-                    @Override
-                    public void call(IFirelyItem value) {
-                        defaults.put(value.getName(), value.getDefault());
-                    }
-                });
+        for (IFirelyItem value: firelyConfig.allValues()) {
+            defaults.put(value.getName(), value.getDefault());
+        };
         mFirebaseRemoteConfig.setDefaults(defaults);
 
         // Init tracking properties from FirebaseRemoteConfig for tracking
@@ -187,13 +182,9 @@ class InternalFirely {
 
     private void updateAllTrackingProperties() {
         final HashMap<String, String> args = new HashMap<>();
-        FuncIter.iter(mConfig.allValues())
-                .each(new FuncIter.Exec<IFirelyItem>() {
-                    @Override
-                    public void call(IFirelyItem value) {
-                        args.put(value.getName(), mFirebaseRemoteConfig.getString(value.getName()));
-                    }
-                });
+        for (IFirelyItem value: mConfig.allValues()) {
+            args.put(value.getName(), mFirebaseRemoteConfig.getString(value.getName()));
+        }
         mAllPropsWithCurrentValue = args;
     }
 }

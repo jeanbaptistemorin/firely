@@ -163,29 +163,17 @@ And this method is called each time we send an event and merged into the propert
 Therefore we can track the configuration changes over time.
 
 
-## Use in the project
+## Build locally
 
+You can build locally the project by:
 
-You need to apply the plugin (TODO integrate in maven repo):
+1. Building the plugin:
 
-```
-buildscript {
-    repositories {
-        mavenLocal()
-        jcenter()
-    }
+`./gradlew :firely-plugin:publishToMaven -c plugin.gradle`
 
-    dependencies {
-        classpath group: 'com.busbud.android', name: 'firely-plugin', version: '0.1.0'
-    }
-}
+2. Building the project:
 
-apply plugin: 'com.busbud.android.firely'
+`./gradlew assembleDebug`
 
-```
-
-You also need to import the aar (TODO integrate in maven repo):
-
-`compile project(':firely-0.1.0')`
 
 
