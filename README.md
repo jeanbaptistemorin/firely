@@ -171,9 +171,10 @@ You can build locally the project by:
 
 `./gradlew :firely-plugin:publishToMaven -c plugin.gradle`
 
-2. Building the project:
 
-`./gradlew assembleDebug`
+2. Create a firebase project for `com.busbud.android.firely.sample` and copy the google-service.json in the /firely-sample repository
+
+2. Build the project: `./gradlew assembleDebug`
 
 
 

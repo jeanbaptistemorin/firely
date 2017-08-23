@@ -45,7 +45,12 @@ android {
 }
 
 dependencies {
+    compile 'com.google.firebase:firebase-core:11.2.0'
     compile 'com.google.firebase:firebase-config:11.2.0'
+
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    provided "org.projectlombok:lombok:1.16.16"
+    annotationProcessor "org.projectlombok:lombok:1.16.6"
 }
 
 task sourceJar(type: Jar) {

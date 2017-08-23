@@ -25,9 +25,12 @@ import android.text.TextUtils;
 
 import java.util.Map;
 
+import lombok.Builder;
+
 public class Firely {
 
     private static Firely sInstance;
+
     private static LogLevel sLogLevel = LogLevel.NONE;
 
     public static Firely setup(Context context) {
@@ -56,6 +59,13 @@ public class Firely {
         } catch (Exception e) {
             throw new IllegalArgumentException("Unable to instantiate FirebaseRemoteConfig", e);
         }
+    }
+
+    @Builder
+    private Firely(Context context, boolean debugMode, LogLevel level) {
+        this(context);
+        setDebugMode(debugMode);
+        setLogLevel(level == null ? LogLevel.NONE : level);
     }
 
     public Firely setDebugMode(boolean debugMode) {
@@ -94,7 +104,7 @@ public class Firely {
         return new OrderedArrayBlock(name.getName(), sInstance.getFirelyInternalConfig());
     }
 
-    public static LiveVariable<Double> doubleVariable(IFirelyItem name) {
+    public LiveVariable<Double> doubleVariable(IFirelyItem name) {
         return variable(name, Double.class);
     }
 

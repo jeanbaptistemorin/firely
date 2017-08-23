@@ -31,6 +31,7 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
@@ -49,6 +50,11 @@ class InternalFirely {
 
     InternalFirely(Context context, IFirelyConfig firelyConfig) {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        try {
+            FirebaseRemoteConfig.getInstance();
+        } catch (IllegalStateException e) {
+            FirebaseApp.initializeApp(context);
+        }
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         mConfig = firelyConfig;
 
