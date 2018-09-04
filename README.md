@@ -3,6 +3,36 @@
 Firely is an A/B Testing overlay based on Firebase Remote Config.
 It's a work in progress to simplify the integration and make the management of A/B testing XPs safer. 
 
+## Download
+
+```
+compile 'com.firely:core:1.0.0'
+```
+
+
+You need to apply the plugin (TODO integrate in maven repo):
+
+```
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        classpath group: 'com.busbud.android', name: 'firely-plugin', version: '0.1.0'
+    }
+}
+
+apply plugin: 'com.busbud.android.firely'
+
+```
+
+You also need to import the aar (TODO integrate in maven repo):
+
+`compile project(':firely-0.1.0')`
+
+
 ## How does it work
 
 This library, integrated in your gradle project, only requires:
@@ -163,29 +193,18 @@ And this method is called each time we send an event and merged into the propert
 Therefore we can track the configuration changes over time.
 
 
-## Use in the project
+## Build locally
+
+You can build locally the project by:
+
+1. Building the plugin:
+
+`./gradlew :firely-plugin:publishToMaven -c plugin.gradle`
 
 
-You need to apply the plugin (TODO integrate in maven repo):
+2. Create a firebase project for `com.busbud.android.firely.sample` and copy the google-service.json in the /firely-sample repository
 
-```
-buildscript {
-    repositories {
-        mavenLocal()
-        jcenter()
-    }
+2. Build the project: `./gradlew assembleDebug`
 
-    dependencies {
-        classpath group: 'com.busbud.android', name: 'firely-plugin', version: '0.1.0'
-    }
-}
-
-apply plugin: 'com.busbud.android.firely'
-
-```
-
-You also need to import the aar (TODO integrate in maven repo):
-
-`compile project(':firely-0.1.0')`
 
 

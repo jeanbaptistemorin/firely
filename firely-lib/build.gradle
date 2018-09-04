@@ -22,14 +22,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "0.2.0"
 
     }
     buildTypes {
@@ -45,8 +45,12 @@ android {
 }
 
 dependencies {
-    compile 'com.google.firebase:firebase-config:10.0.1'
-    compile 'com.github.smaspe:iterables:0.3.0'
+    implementation 'com.google.firebase:firebase-core:16.0.3'
+    implementation 'com.google.firebase:firebase-config:16.0.0'
+
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+    compileOnly "org.projectlombok:lombok:1.16.16"
+    annotationProcessor "org.projectlombok:lombok:1.16.16"
 }
 
 task sourceJar(type: Jar) {
@@ -59,7 +63,7 @@ publishing {
         firely(MavenPublication) {
             groupId 'com.busbud.android'
             artifactId 'firely'
-            version '0.1.0'
+            version '0.2.0'
             artifact(sourceJar)
             artifact("$buildDir/outputs/aar/firely-lib-release.aar")
         }

@@ -25,26 +25,33 @@ import android.text.TextUtils;
 
 import java.util.Map;
 
+import lombok.Builder;
+
 public class Firely {
 
     private static Firely sInstance;
+
     private static LogLevel sLogLevel = LogLevel.NONE;
 
     public static Firely setup(Context context) {
+        return setup(context, "com.busbud.android.firely.FirelyConfig");
+    }
+
+    public static Firely setup(Context context, String firelyConfigClassName) {
         if (sInstance == null) {
-            sInstance = new Firely(context);
+            sInstance = new Firely(context, firelyConfigClassName);
         }
         return sInstance;
     }
 
     private InternalFirely mInternal;
 
-    private Firely(Context context) {
+    private Firely(Context context, String firelyConfigClassName) {
 
         // Find the auto-generated FirelyConfig
         final IFirelyConfig firelyConfig;
         try {
-            Class firelyConfigClass = Class.forName("com.busbud.android.firely.FirelyConfig");
+            Class firelyConfigClass = Class.forName(firelyConfigClassName);
             firelyConfig = (IFirelyConfig) firelyConfigClass.newInstance();
         } catch (Exception e) {
             throw new IllegalArgumentException("Unable to read com.busbud.android.firely.FirelyConfig generated class");
@@ -94,7 +101,7 @@ public class Firely {
         return new OrderedArrayBlock(name.getName(), sInstance.getFirelyInternalConfig());
     }
 
-    public static LiveVariable<Double> doubleVariable(IFirelyItem name) {
+    public LiveVariable<Double> doubleVariable(IFirelyItem name) {
         return variable(name, Double.class);
     }
 
