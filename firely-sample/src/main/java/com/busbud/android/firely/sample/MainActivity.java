@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView view = (TextView) findViewById(R.id.text_view);
+        TextView view = findViewById(R.id.text_view);
         view.setVisibility(mFeatureFlag.get() ? View.VISIBLE : View.INVISIBLE);
         view.setText(mTextXp.get());
     }

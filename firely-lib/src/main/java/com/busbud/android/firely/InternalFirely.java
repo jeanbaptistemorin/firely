@@ -105,7 +105,7 @@ class InternalFirely {
         final HashMap<String, Object> defaults = new HashMap<>();
         for (IFirelyItem value: firelyConfig.allValues()) {
             defaults.put(value.getName(), value.getDefault());
-        };
+        }
         mFirebaseRemoteConfig.setDefaults(defaults);
 
         // Init tracking properties from FirebaseRemoteConfig for tracking

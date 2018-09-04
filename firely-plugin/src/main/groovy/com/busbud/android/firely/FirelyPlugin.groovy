@@ -40,7 +40,7 @@ class FirelyPlugin implements Plugin<Project> {
             File sourceFolder = new File(project.buildDir, "/generated/source/firely/${variant.dirName}")
             def configFile = new File(FILE_NAME)
             if (!configFile.exists()) {
-                configFile = new File("./${project.name}/${FILE_NAME}")
+                configFile = new File("${project.projectDir}/${FILE_NAME}")
             }
             if (!configFile.exists()) {
                 println("Unable to find ${FILE_NAME} in your project")

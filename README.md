@@ -3,6 +3,36 @@
 Firely is an A/B Testing overlay based on Firebase Remote Config.
 It's a work in progress to simplify the integration and make the management of A/B testing XPs safer. 
 
+## Download
+
+```
+compile 'com.firely:core:1.0.0'
+```
+
+
+You need to apply the plugin (TODO integrate in maven repo):
+
+```
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        classpath group: 'com.busbud.android', name: 'firely-plugin', version: '0.1.0'
+    }
+}
+
+apply plugin: 'com.busbud.android.firely'
+
+```
+
+You also need to import the aar (TODO integrate in maven repo):
+
+`compile project(':firely-0.1.0')`
+
+
 ## How does it work
 
 This library, integrated in your gradle project, only requires:

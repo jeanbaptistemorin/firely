@@ -34,20 +34,24 @@ public class Firely {
     private static LogLevel sLogLevel = LogLevel.NONE;
 
     public static Firely setup(Context context) {
+        return setup(context, "com.busbud.android.firely.FirelyConfig");
+    }
+
+    public static Firely setup(Context context, String firelyConfigClassName) {
         if (sInstance == null) {
-            sInstance = new Firely(context);
+            sInstance = new Firely(context, firelyConfigClassName);
         }
         return sInstance;
     }
 
     private InternalFirely mInternal;
 
-    private Firely(Context context) {
+    private Firely(Context context, String firelyConfigClassName) {
 
         // Find the auto-generated FirelyConfig
         final IFirelyConfig firelyConfig;
         try {
-            Class firelyConfigClass = Class.forName("com.busbud.android.firely.FirelyConfig");
+            Class firelyConfigClass = Class.forName(firelyConfigClassName);
             firelyConfig = (IFirelyConfig) firelyConfigClass.newInstance();
         } catch (Exception e) {
             throw new IllegalArgumentException("Unable to read com.busbud.android.firely.FirelyConfig generated class");
@@ -59,13 +63,6 @@ public class Firely {
         } catch (Exception e) {
             throw new IllegalArgumentException("Unable to instantiate FirebaseRemoteConfig", e);
         }
-    }
-
-    @Builder
-    private Firely(Context context, boolean debugMode, LogLevel level) {
-        this(context);
-        setDebugMode(debugMode);
-        setLogLevel(level == null ? LogLevel.NONE : level);
     }
 
     public Firely setDebugMode(boolean debugMode) {
