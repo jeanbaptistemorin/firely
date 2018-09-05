@@ -20,6 +20,13 @@
 
 package com.busbud.android.firely;
 
+import android.support.annotation.Nullable;
+
+import java.util.Map;
+
 public interface IFirelyConfig {
     IFirelyItem[] allValues();
+
+    @Nullable
+    Map<String, Object> getDefaults();
 }

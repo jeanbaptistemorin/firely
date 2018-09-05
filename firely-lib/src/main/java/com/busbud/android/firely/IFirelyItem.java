@@ -20,8 +20,8 @@
 
 package com.busbud.android.firely;
 
-public interface IFirelyItem {
-    String getName();
+import android.support.annotation.NonNull;
 
-    Object getDefault();
+public interface IFirelyItem {
+    @NonNull String getKeyName();
 }
